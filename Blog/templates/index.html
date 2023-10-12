@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <div class="col-12 col-md-8">
+        <h1>Blog en Django</h1>
+
+        <hr>
+
+        {% for posteo in poteos %}
+            <h2>
+                <a href="{% url 'blog_detail' posteo.pk %}">{{ posteo.titulo }}</a>
+            </h2>
+            <small>
+                {{ posteo.created_on.date }}|&nbsp;
+                Categorías:&nbsp;
+
+                {% for categoria in posteo.categorias.all %}
+                    <a href="">{{ categoria.nombre }}</a>&nbsp;
+                {% endfor %}
+            </small>
+
+            <p>{{ posteo.body|slice:":400" }} ...</p>
+        {% endfor %}
+    </div>
+{% endblock %}
